@@ -5,10 +5,10 @@ use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class GenerateImport extends BaseGenerator
+class GenerateExport extends BaseGenerator
 {
 
-    protected $classType = 'import';
+    protected $classType = 'export';
 
     protected $model;
 
@@ -31,14 +31,14 @@ class GenerateImport extends BaseGenerator
      *
      * @var string
      */
-    protected $signature = 'admin:import {table : table to generate crud for } {--user : When added the crud is generated for a user model}';
+    protected $signature = 'admin:export {table : table to generate crud for } {--user : When added the crud is generated for a user model}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generates import';
+    protected $description = 'Generates export';
 
 
     /**
@@ -49,7 +49,7 @@ class GenerateImport extends BaseGenerator
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'Imports\\';
+        return $rootNamespace.'Exports\\';
     }
 
     /**
@@ -59,7 +59,7 @@ class GenerateImport extends BaseGenerator
      */
     public function handle()
     {
-        $this->info('Generating Imports Class');
+        $this->info('Generating Exports Class');
 
         $this->className = $this->getClassName().'';
 
@@ -69,7 +69,7 @@ class GenerateImport extends BaseGenerator
 
         @$this->files->makeDirectory($path = $this->getPathFromNamespace($this->namespace), 0777);
 
-        $filename = $path.DIRECTORY_SEPARATOR.Str::plural($this->className).'Import.php';
+        $filename = $path.DIRECTORY_SEPARATOR.Str::plural($this->className).'Export.php';
 
         $this->files->put($filename, $templateContent);
 

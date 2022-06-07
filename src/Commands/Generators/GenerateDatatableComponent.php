@@ -1,10 +1,9 @@
 <?php
-namespace Zekini\CrudGenerator\Commands\Generators\Component;
+namespace Zekini\DatatableCrud\Commands\Generators;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Zekini\CrudGenerator\Commands\Generators\BaseGenerator;
 
 class GenerateDatatableComponent extends BaseGenerator
 {
@@ -49,6 +48,9 @@ class GenerateDatatableComponent extends BaseGenerator
     public function handle(Filesystem $files)
     {
         $this->info('Generating Datatable Component Class');
+
+        $this->call('admin:import', ['table'=> $this->argument('table')]);
+        $this->call('admin:export', ['table'=> $this->argument('table')]);
 
        $this->className = $this->getClassName();
 
