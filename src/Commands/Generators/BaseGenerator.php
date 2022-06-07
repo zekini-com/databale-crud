@@ -12,8 +12,6 @@ abstract class BaseGenerator extends Command
 
     use ColumnTrait, HasRelations;
 
-    protected $hidden = true;
-
 
     protected $classType;
 
@@ -104,7 +102,7 @@ abstract class BaseGenerator extends Command
 
         $variables = $this->getViewData();
 
-        $view = "zekini/datatables::templates.".$this->classType;
+        $view = "zekini/datatable-stubs::templates.".$this->classType;
 
         return view($view, $variables)->render();
 
