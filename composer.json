@@ -1,0 +1,37 @@
+{
+    "name": "zekini/datatable-crud",
+    "description": "This is a databale crud generator package used at zekini",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Keania Niate Eric",
+            "email": "keania@zekini.com"
+        },
+        {
+            "name": "Llewellyn du Randt",
+            "email": "llewellyn@zekini.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Zekini\\DatatableCrud\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zekini\\DatatableCrud\\DatatableCrudServiceProvider"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zekini\\CrudGenerator\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "rappasoft/laravel-livewire-tables": "^2.7"
+    }
+}
