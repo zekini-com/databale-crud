@@ -6,8 +6,13 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableComponent;
+use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateExport;
+use Zekini\DatatableCrud\Commands\Generators\GenerateForm;
 use Zekini\DatatableCrud\Commands\Generators\GenerateImport;
+use Zekini\DatatableCrud\Commands\Generators\GenerateIndexComponent;
+use Zekini\DatatableCrud\Commands\Generators\GenerateIndexTest;
+use Zekini\DatatableCrud\Commands\Generators\GenerateIndexView;
 use Zekini\DatatableCrud\Mixins\StrMixin;
 
 
@@ -47,7 +52,12 @@ class DatatableCrudServiceProvider extends ServiceProvider
         $this->commands([
             GenerateDatatableComponent::class,
             GenerateImport::class,
-            GenerateExport::class
+            GenerateExport::class,
+            GenerateForm::class,
+            GenerateDatatableTest::class,
+            GenerateIndexTest::class,
+            GenerateIndexComponent::class,
+            GenerateIndexView::class
         ]);
     }
 

@@ -4,28 +4,19 @@ namespace Zekini\DatatableCrud\Commands\Generators;
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Zekini\CrudGenerator\Commands\Generators\BaseGenerator;
 
-class GenerateDatatableComponent extends BaseGenerator
+class GenerateIndexComponent extends BaseGenerator
 {
 
-    protected $classType = "component-datatable";
-
-    protected $classSuites = [
-        "admin:import",
-        "admin:export",
-        "admin:datatable-test",
-        "admin:index-test",
-        "admin:form",
-        "admin:index",
-        "admin:index-view"
-    ];
+    protected $classType = "component-index";
 
      /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'admin:datatable
+    protected $signature = 'admin:index
                             {table : table to generate crud for }
                             {--user : When added the crud is generated for a user model}
                             {--readonly : The datatable is read only no create and edit buttons}';
@@ -35,7 +26,7 @@ class GenerateDatatableComponent extends BaseGenerator
      *
      * @var string
      */
-    protected $description = 'Generates a datatable for a component';
+    protected $description = 'Generates a livewire index component for the model';
 
 
     /**
@@ -57,21 +48,21 @@ class GenerateDatatableComponent extends BaseGenerator
      */
     public function handle(Filesystem $files)
     {
-        $this->info('Generating Datatable Component Class');
+        $this->info('Generating Index Component Class');
 
-        foreach($this->classSuites as $command){
-            $this->call($command, ['table'=> $this->argument('table')]);
-        }
-
+       //publish any vendor files to where they belong
        $this->className = $this->getClassName();
+
+       $this->classNameKebab = Str::kebab($this->className);
+
+       $this->namespace = $this->getDefaultNamespace($this->rootNamespace());
 
        $templateContent = $this->replaceContent();
 
-       $path = $this->getLivewireComponentDir('Datatable');
+       $path = $this->getLivewireComponentDir();
 
-       @$this->files->makeDirectory($path, 0777, true, true);
-
-       $filename = $path.DIRECTORY_SEPARATOR.Str::plural($this->className).'Table.php';
+       @$this->files->makeDirectory($path, 0777);
+       $filename = $path.DIRECTORY_SEPARATOR.Str::plural(ucfirst($this->className)).'.php';
 
        $this->files->put($filename, $templateContent);
 
@@ -86,29 +77,23 @@ class GenerateDatatableComponent extends BaseGenerator
      */
     protected function getViewData()
     {
-
-    // I need to check when the relationship is a belongsto
-    $pivots = $this->belongsToConfiguration()->filter(function($item){
-        return !empty($item['pivot']) && isset($item['pivot']);
-    });
-
-    $vissibleRelationships = $this->getVissibleRelationships();
+        $pivots = $this->belongsToConfiguration()->filter(function($item){
+            return !empty($item['pivot']) && isset($item['pivot']);
+        });
 
         return [
-
             'controllerNamespace' => rtrim($this->namespace, '\\'),
             'modelBaseName' => $this->className,
+            'viewName'=> Str::plural($this->classNameKebab),
             'modelVariableName' => strtolower($this->className),
             'modelDotNotation' => Str::singular($this->argument('table')),
             'resource'=> strtolower($this->className),
             'modelFullName'=> "App\Models\\".$this->className,
             'vissibleColumns'=> $this->getColumnDetails(),
-            'relations'=>$this->belongsToConfiguration() ?? [],
-            'pivots'=> $pivots,
-            'vissibleRelationships'=> $vissibleRelationships,
-            'tableTitleMap'=> $this->getRecordTitleTableMap(),
-            'canBeTrashed'=> $this->hasColumn('deleted_at'),
             'hasFile'=> $this->hasColumn('image') || $this->hasColumn('file'),
+            'pivots'=> $pivots ?? [],
+            'userModel'=> $this->option('user'),
+            'tableName'=> $this->argument('table'),
             'isReadonly'=> $this->option('readonly')
         ];
     }
