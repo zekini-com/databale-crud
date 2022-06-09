@@ -7,12 +7,14 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Zekini\DatatableCrud\Commands\Generators\GenerateCreateModal;
 use Zekini\DatatableCrud\Commands\Generators\GenerateCreateModalView;
+use Zekini\DatatableCrud\Commands\Generators\GenerateCreateTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableComponent;
-use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableTest;
+use Zekini\DatatableCrud\Commands\Generators\GenerateDeleteTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDeleteModal;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDeleteModalView;
 use Zekini\DatatableCrud\Commands\Generators\GenerateEditModal;
 use Zekini\DatatableCrud\Commands\Generators\GenerateEditModalView;
+use Zekini\DatatableCrud\Commands\Generators\GenerateEditTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateExport;
 use Zekini\DatatableCrud\Commands\Generators\GenerateForm;
 use Zekini\DatatableCrud\Commands\Generators\GenerateImport;
@@ -62,8 +64,12 @@ class DatatableCrudServiceProvider extends ServiceProvider
             GenerateImport::class,
             GenerateExport::class,
             GenerateForm::class,
-            GenerateDatatableTest::class,
+
+            GenerateDeleteTest::class,
             GenerateIndexTest::class,
+            GenerateCreateTest::class,
+            GenerateEditTest::class,
+
             GenerateIndexComponent::class,
             GenerateIndexView::class,
             GenerateRoutes::class,

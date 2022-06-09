@@ -13,8 +13,10 @@ class GenerateDatatableComponent extends BaseGenerator
     protected $classSuites = [
         "admin:import",
         "admin:export",
-        "admin:datatable-test",
+        "admin:delete-test",
         "admin:index-test",
+        "admin:create-test",
+        "admin:edit-test",
         "admin:form",
         "admin:index",
         "admin:index-view",

@@ -6,10 +6,10 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 
-class GenerateDatatableTest extends BaseGenerator
+class GenerateEditTest extends BaseGenerator
 {
 
-    protected $classType = 'datatable-test';
+    protected $classType = 'edit-test';
 
     protected $testBaseName;
 
@@ -18,7 +18,7 @@ class GenerateDatatableTest extends BaseGenerator
      *
      * @var string
      */
-    protected $signature = 'admin:datatable-test
+    protected $signature = 'admin:edit-test
                             {table : table to generate crud for }
                             {--user : When added the crud is generated for a user model}
                             {--readonly : The datatable is read only no create and edit buttons}';
@@ -28,7 +28,7 @@ class GenerateDatatableTest extends BaseGenerator
      *
      * @var string
      */
-    protected $description = 'Generates Unit testing';
+    protected $description = 'Generates Edit testing';
 
 
       /**
@@ -49,15 +49,17 @@ class GenerateDatatableTest extends BaseGenerator
     public function handle(Filesystem $files)
     {
         if($this->option('readonly')) {
-            $this->info('Skipping generating datatable test for readonly classes');
+            $this->info('Skipping generating edit test for readonly classes');
             return Command::SUCCESS;
         }
+
+        $this->info('Generating Edit Test Class');
 
        //publish any vendor files to where they belong
        $this->className = $this->getClassName();
        $this->classNameKebab = Str::kebab($this->className);
 
-       $this->testBaseName = $this->className.'DatatableTest';
+
 
        $this->namespace = $this->getDefaultNamespace().DIRECTORY_SEPARATOR.ucfirst($this->className);
 
@@ -66,7 +68,7 @@ class GenerateDatatableTest extends BaseGenerator
 
        @$this->files->makeDirectory($path = $this->getPathFromNamespace($this->namespace), 0777, true, true);
 
-       $filename = $path.DIRECTORY_SEPARATOR.$this->testBaseName.'.php';
+       $filename = $path.DIRECTORY_SEPARATOR.'EditTest.php';
 
        $this->files->put($filename, $templateContent);
 
@@ -80,6 +82,9 @@ class GenerateDatatableTest extends BaseGenerator
      */
     protected function getViewData()
     {
+        $pivots = $this->belongsToConfiguration()->filter(function($item){
+            return !empty($item['pivot']) && isset($item['pivot']);
+        });
 
         return [
             'modelBaseName' => ucfirst($this->getClassName()),
@@ -88,8 +93,8 @@ class GenerateDatatableTest extends BaseGenerator
             'tableName'=> $this->argument('table'),
             'columnFakerMappings'=> $this->getColumnFakerMap(),
             'viewName'=> 'create-'.$this->classNameKebab,
-            'modelDotNotation'=> Str::singular($this->argument('table'))
-
+            'modelDotNotation'=> Str::singular($this->argument('table')),
+            'pivots'=> $pivots
         ];
     }
 

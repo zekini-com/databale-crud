@@ -121,7 +121,7 @@ abstract class BaseGenerator extends Command
                'name'=> $colArr['name'],
                'faker'=> $this->decideFaker($colArr['type'], $colArr['name'])
            ];
-       });
+       })->values();
 
     }
 
