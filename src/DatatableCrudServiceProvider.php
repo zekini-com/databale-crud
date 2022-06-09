@@ -9,6 +9,8 @@ use Zekini\DatatableCrud\Commands\Generators\GenerateCreateModal;
 use Zekini\DatatableCrud\Commands\Generators\GenerateCreateModalView;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableComponent;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableTest;
+use Zekini\DatatableCrud\Commands\Generators\GenerateDeleteModal;
+use Zekini\DatatableCrud\Commands\Generators\GenerateDeleteModalView;
 use Zekini\DatatableCrud\Commands\Generators\GenerateEditModal;
 use Zekini\DatatableCrud\Commands\Generators\GenerateEditModalView;
 use Zekini\DatatableCrud\Commands\Generators\GenerateExport;
@@ -70,7 +72,9 @@ class DatatableCrudServiceProvider extends ServiceProvider
             GenerateIndexView::class,
             GenerateEditModalView::class,
             GenerateCreateModalView::class,
-            GenerateTableActions::class
+            GenerateTableActions::class,
+            GenerateDeleteModal::class,
+            GenerateDeleteModalView::class
         ]);
     }
 

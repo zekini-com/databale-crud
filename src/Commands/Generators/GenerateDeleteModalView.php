@@ -6,17 +6,17 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 
-class GenerateForm extends BaseGenerator
+class GenerateDeleteModalView extends BaseGenerator
 {
 
-    protected $classType = 'form';
+    protected $classType = 'delete-view';
 
      /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'admin:form {table : table to generate crud for } {--user : When added the crud is generated for a user model}';
+    protected $signature = 'admin:delete-modal-view {table : table to generate crud for } {--user : When added the crud is generated for a user model}';
 
     /**
      * The console command description.
@@ -42,8 +42,8 @@ class GenerateForm extends BaseGenerator
 
        $templateContent = $this->replaceContent();
 
-       @$this->files->makeDirectory($path = resource_path('views/livewire/'.Str::plural($this->classNameKebab).DIRECTORY_SEPARATOR.'partials'), 0777, true);
-       $filename = $path.DIRECTORY_SEPARATOR.'form.blade.php';
+       @$this->files->makeDirectory($path = resource_path('views/livewire/'.Str::plural($this->classNameKebab).DIRECTORY_SEPARATOR), 0777, true);
+       $filename = $path.DIRECTORY_SEPARATOR.'delete.blade.php';
 
        $this->files->put($filename, $templateContent);
 
@@ -65,12 +65,14 @@ class GenerateForm extends BaseGenerator
         $belongsTo = $this->belongsToConfiguration()->pluck('column')->toArray();
 
 
+
         return [
             'vissibleColumns'=> $this->getColumnDetails(),
             'relations'=>  $this->getRelations(),
             'belongsTo'=> $belongsTo,
             'recordTitleMap'=> $this->getRecordTitleTableMap(),
-            'pivots'=> $pivots ?? []
+            'pivots'=> $pivots ?? [],
+            'resourcePlural'=> Str::plural($this->classNameKebab)
         ];
     }
 
