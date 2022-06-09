@@ -73,7 +73,7 @@ class GenerateTableActions extends BaseGenerator
             'recordTitleMap'=> $this->getRecordTitleTableMap(),
             'pivots'=> $pivots ?? [],
             'resourcePlural'=> Str::plural($this->classNameKebab),
-            'resource'=> $this->classNameKebab
+            'resource'=> $this->classNameKebab,
         ];
     }
 
