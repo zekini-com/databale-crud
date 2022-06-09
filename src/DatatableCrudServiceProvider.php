@@ -5,9 +5,24 @@ namespace Zekini\DatatableCrud;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Zekini\DatatableCrud\Commands\Generators\GenerateCreateModal;
+use Zekini\DatatableCrud\Commands\Generators\GenerateCreateModalView;
+use Zekini\DatatableCrud\Commands\Generators\GenerateCreateTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableComponent;
+use Zekini\DatatableCrud\Commands\Generators\GenerateDeleteTest;
+use Zekini\DatatableCrud\Commands\Generators\GenerateDeleteModal;
+use Zekini\DatatableCrud\Commands\Generators\GenerateDeleteModalView;
+use Zekini\DatatableCrud\Commands\Generators\GenerateEditModal;
+use Zekini\DatatableCrud\Commands\Generators\GenerateEditModalView;
+use Zekini\DatatableCrud\Commands\Generators\GenerateEditTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateExport;
+use Zekini\DatatableCrud\Commands\Generators\GenerateForm;
 use Zekini\DatatableCrud\Commands\Generators\GenerateImport;
+use Zekini\DatatableCrud\Commands\Generators\GenerateIndexComponent;
+use Zekini\DatatableCrud\Commands\Generators\GenerateIndexTest;
+use Zekini\DatatableCrud\Commands\Generators\GenerateIndexView;
+use Zekini\DatatableCrud\Commands\Generators\GenerateRoutes;
+use Zekini\DatatableCrud\Commands\Generators\GenerateTableActions;
 use Zekini\DatatableCrud\Mixins\StrMixin;
 
 
@@ -47,7 +62,25 @@ class DatatableCrudServiceProvider extends ServiceProvider
         $this->commands([
             GenerateDatatableComponent::class,
             GenerateImport::class,
-            GenerateExport::class
+            GenerateExport::class,
+            GenerateForm::class,
+
+            GenerateDeleteTest::class,
+            GenerateIndexTest::class,
+            GenerateCreateTest::class,
+            GenerateEditTest::class,
+
+            GenerateIndexComponent::class,
+            GenerateIndexView::class,
+            GenerateRoutes::class,
+            GenerateCreateModal::class,
+            GenerateEditModal::class,
+            GenerateIndexView::class,
+            GenerateEditModalView::class,
+            GenerateCreateModalView::class,
+            GenerateTableActions::class,
+            GenerateDeleteModal::class,
+            GenerateDeleteModalView::class
         ]);
     }
 
