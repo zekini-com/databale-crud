@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Zekini\DatatableCrud\Commands\Generators\GenerateCreateModal;
+use Zekini\DatatableCrud\Commands\Generators\GenerateCreateModalView;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableComponent;
 use Zekini\DatatableCrud\Commands\Generators\GenerateDatatableTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateEditModal;
@@ -17,6 +18,7 @@ use Zekini\DatatableCrud\Commands\Generators\GenerateIndexComponent;
 use Zekini\DatatableCrud\Commands\Generators\GenerateIndexTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateIndexView;
 use Zekini\DatatableCrud\Commands\Generators\GenerateRoutes;
+use Zekini\DatatableCrud\Commands\Generators\GenerateTableActions;
 use Zekini\DatatableCrud\Mixins\StrMixin;
 
 
@@ -66,7 +68,9 @@ class DatatableCrudServiceProvider extends ServiceProvider
             GenerateCreateModal::class,
             GenerateEditModal::class,
             GenerateIndexView::class,
-            GenerateEditModalView::class
+            GenerateEditModalView::class,
+            GenerateCreateModalView::class,
+            GenerateTableActions::class
         ]);
     }
 

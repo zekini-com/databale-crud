@@ -109,7 +109,7 @@ class {{Str::plural(ucfirst($modelBaseName))}}Table extends DataTableComponent
             @if(! $isReadonly)
             Column::make('Actions')->label(function($row){
                 $id = $row->id;
-                return view('zekini/datatable-crud::table-actions', [
+                return view('livewire.{{strtolower(Str::plural($modelBaseName))}}.table-actions', [
                     'id' => $id,
                     'editRoute'=>"/{{strtolower(Str::plural($modelBaseName))}}/$id/edit"
                 ]);

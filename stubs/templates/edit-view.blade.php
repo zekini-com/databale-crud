@@ -1,3 +1,7 @@
+@php
+$formPath = "livewire.$resourcePlural.partials.form";
+@endphp
+
 <div>
-   {{'@''}}include('livewire.{{$resourcePlural}}.partials.form')
+   {{'@'}}include('{{$formPath}}')
 </div>

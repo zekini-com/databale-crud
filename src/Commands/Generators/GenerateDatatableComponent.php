@@ -22,7 +22,8 @@ class GenerateDatatableComponent extends BaseGenerator
         "admin:create-modal",
         "admin:edit-modal",
         "admin:create-modal-view",
-        "admin:edit-modal-view"
+        "admin:edit-modal-view",
+        "admin:table-actions"
     ];
 
      /**
