@@ -17,7 +17,8 @@ class GenerateDatatableComponent extends BaseGenerator
         "admin:index-test",
         "admin:form",
         "admin:index",
-        "admin:index-view"
+        "admin:index-view",
+        "admin:routes"
     ];
 
      /**

@@ -13,6 +13,7 @@ use Zekini\DatatableCrud\Commands\Generators\GenerateImport;
 use Zekini\DatatableCrud\Commands\Generators\GenerateIndexComponent;
 use Zekini\DatatableCrud\Commands\Generators\GenerateIndexTest;
 use Zekini\DatatableCrud\Commands\Generators\GenerateIndexView;
+use Zekini\DatatableCrud\Commands\Generators\GenerateRoutes;
 use Zekini\DatatableCrud\Mixins\StrMixin;
 
 
@@ -57,7 +58,8 @@ class DatatableCrudServiceProvider extends ServiceProvider
             GenerateDatatableTest::class,
             GenerateIndexTest::class,
             GenerateIndexComponent::class,
-            GenerateIndexView::class
+            GenerateIndexView::class,
+            GenerateRoutes::class
         ]);
     }
 

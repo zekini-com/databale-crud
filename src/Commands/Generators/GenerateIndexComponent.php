@@ -4,7 +4,6 @@ namespace Zekini\DatatableCrud\Commands\Generators;
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Zekini\CrudGenerator\Commands\Generators\BaseGenerator;
 
 class GenerateIndexComponent extends BaseGenerator
 {
@@ -62,7 +61,7 @@ class GenerateIndexComponent extends BaseGenerator
        $path = $this->getLivewireComponentDir();
 
        @$this->files->makeDirectory($path, 0777);
-       $filename = $path.DIRECTORY_SEPARATOR.Str::plural(ucfirst($this->className)).'.php';
+       $filename = $path.DIRECTORY_SEPARATOR.'Index.php';
 
        $this->files->put($filename, $templateContent);
 

@@ -5,7 +5,6 @@ use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
-use Zekini\CrudGenerator\Commands\Generators\BaseGenerator;
 
 class GenerateDatatableTest extends BaseGenerator
 {

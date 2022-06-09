@@ -6,17 +6,15 @@ namespace App\Http\Livewire\{{Str::plural(ucfirst($modelBaseName))}};
 use {{ $modelFullName }};
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
-use Livewire\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 
 @php($lowerModelBaseName = Str::camel($modelBaseName))
 
-class {{Str::plural($modelBaseName)}} extends Component
+class Index extends Component
 {
     @if(! $isReadonly)
     use WithFileUploads;
-    use AuthorizesRequests;
 
     public {{$modelBaseName}} ${{$lowerModelBaseName}};
 
@@ -28,8 +26,7 @@ class {{Str::plural($modelBaseName)}} extends Component
 
     protected $listeners = [
         'launch{{$modelBaseName}}CreateModal',
-        'launch{{$modelBaseName}}EditModal',
-        'flashMessageEvent' => 'flashMessageEvent'
+        'launch{{$modelBaseName}}EditModal'
     ];
 
     public function mount()
@@ -40,9 +37,7 @@ class {{Str::plural($modelBaseName)}} extends Component
 
     public function render()
     {
-        return view('livewire.{{$viewName}}.index')
-            ->extends('zekini/livewire-crud-generator::admin.layout.default')
-            ->section('body');
+        return view('livewire.{{$viewName}}.index');
     }
 
     @if(! $isReadonly)
@@ -116,13 +111,7 @@ class {{Str::plural($modelBaseName)}} extends Component
 
         $model = {{$modelBaseName}}::create($data);
         @foreach($pivots as $pivot)
-        @if($modelBaseName == 'ZekiniAdmin')
-        $model->{{$pivot['table']}}()->syncWithPivotValues($this->state['{{$pivot['table']}}'], [
-            'model_type' => 'Zekini\CrudGenerator\Models\ZekiniAdmin'
-        ]);
-        @else
-        $model->{{$pivot['table']}}()->sync($this->state['{{$pivot['table']}}']);
-        @endif
+            $model->{{$pivot['table']}}()->sync($this->state['{{$pivot['table']}}']);
         @endforeach
     }
 
@@ -132,14 +121,7 @@ class {{Str::plural($modelBaseName)}} extends Component
 
         $model->update($data);
         @foreach($pivots as $pivot)
-        @if($modelBaseName == 'ZekiniAdmin')
-        $model->{{$pivot['table']}}()->syncWithPivotValues($this->state['{{$pivot['table']}}'], [
-            'model_type' => 'Zekini\CrudGenerator\Models\ZekiniAdmin'
-        ]);
-        @else
-        $model->{{$pivot['table']}}()->sync($this->state['{{$pivot['table']}}']);
-        @endif
-
+            $model->{{$pivot['table']}}()->sync($this->state['{{$pivot['table']}}']);
         @endforeach
     }
     @endif

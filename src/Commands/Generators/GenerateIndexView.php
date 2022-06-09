@@ -5,7 +5,6 @@ use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
-use Zekini\CrudGenerator\Commands\Generators\BaseGenerator;
 
 class GenerateIndexView extends BaseGenerator
 {
@@ -17,7 +16,7 @@ class GenerateIndexView extends BaseGenerator
      *
      * @var string
      */
-    protected $signature = 'admin:views-index {table : table to generate crud for } {--user : When added the crud is generated for a user model}';
+    protected $signature = 'admin:index-view {table : table to generate crud for } {--user : When added the crud is generated for a user model}';
 
     /**
      * The console command description.
