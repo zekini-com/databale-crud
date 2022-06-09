@@ -13,6 +13,17 @@ The **zekini/datatable-crud** package allows us to generate datatable for a part
 `composer require --dev zekini/datatable-crud`
 
   
+## Setup
+
+This package makes use of two additional packages 
+
+[https://github.com/wire-elements/modal] Wire modal and [https://github.com/jantinnerezo/livewire-alert] which requires you to add the following to your `layouts.app` just after the livewire scripts
+`
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <x-livewire-alert::scripts />
+    @livewire('livewire-ui-modal')
+`
 ## Usage
 
 To generate a datatable
