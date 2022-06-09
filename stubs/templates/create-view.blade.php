@@ -2,8 +2,9 @@
 $formPath = "livewire.$resourcePlural.partials.form";
 @endphp
 
-<div>
-    <form wire:submit.prevent="submit">
+<div class="w-4/5 m-auto">
+
+    <form wire:submit.prevent="submit" class="bg-white rounded px-8 pt-6 pb-4">
         {{'@'}}include('{{$formPath}}')
 
         <div class="flex items-center justify-end p-6 border-t border-solid border-gray-200 rounded-b">
